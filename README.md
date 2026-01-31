@@ -2,107 +2,41 @@
 
 Convert Moodle lecture videos to MP3 files for NotebookLM transcription.
 
+## 🚀 Quick Start
+
+**Open in Google Colab (no installation needed!):**
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/AniShpiz/moodle-to-audio/blob/master/Moodle_to_MP3_Colab.ipynb)
+
+## How It Works
+
+1. **Get cookies** - Install browser extension, export Moodle cookies
+2. **Extract links** - Run a script in browser console to get video URLs
+3. **Download & convert** - Colab downloads videos and converts to MP3
+4. **Download zip** - Get all MP3 files in one zip
+
+Full instructions are inside the notebook!
+
 ## 🎯 Project Purpose
 
 This project serves as a **learning playground** for:
 - **Git Branching** - Practice with feature branches, merging, and branch workflows
-- **Unit Testing** - Writing and running Python tests with `pytest`
 - **Collaboration** - Pull requests and code reviews
 
-## Quick Start
-
-### Step 1: Extract Video Links (in Browser)
-
-1. Open your Moodle course page with the video table
-2. Press `F12` to open DevTools → Console tab
-3. Paste and run this code:
-
-```javascript
-(async () => {
-    const tableBody = document.querySelector("#videoslist_table > tbody");
-    if (!tableBody) { alert("Table not found!"); return; }
-    
-    const links = Array.from(tableBody.querySelectorAll("a"))
-        .map(a => a.href)
-        .filter(href => href.includes("php") || href.includes("video"));
-    
-    console.log(`Found ${links.length} sub-pages. Fetching videos...`);
-    
-    let videos = [];
-    for (let i = 0; i < links.length; i++) {
-        console.log(`Processing ${i+1}/${links.length}...`);
-        try {
-            const html = await fetch(links[i]).then(r => r.text());
-            const match = html.match(/https?:\/\/[^"'\s]+\.mp4/i);
-            if (match) videos.push(match[0]);
-        } catch(e) { console.error(e); }
-    }
-    
-    const unique = [...new Set(videos)];
-    copy(unique.join('\n'));
-    console.log(`✅ ${unique.length} video URLs copied to clipboard!`);
-    alert(`${unique.length} links copied! Paste into links.txt`);
-})();
-```
-
-4. Links are now in your clipboard!
-
-### Step 2: Download & Convert
-
-1. Open `links.txt` and paste the links (replace the placeholder)
-2. **Close Chrome completely** (required for cookie access)
-3. Double-click `RUN_ME.bat`
-4. Wait for downloads to complete
-5. Find your MP3 files in the `mp3_output` folder!
-
-## Requirements
-
-- Python 3.x
-- Chrome or Edge browser
-- FFmpeg (for MP3 conversion)
-
-### Install FFmpeg
-
-Download from https://ffmpeg.org/download.html and add to PATH, or:
-
-```powershell
-# With Chocolatey
-choco install ffmpeg
-
-# With Winget
-winget install FFmpeg
-```
-
-## Troubleshooting
-
-| Problem | Solution |
-|---------|----------|
-| "Access denied" | Close Chrome, then run again |
-| "FFmpeg not found" | Install FFmpeg and add to PATH |
-| Using Edge? | Edit `download_and_convert.py`, change `chrome` to `edge` |
-| Partial downloads | Some links may be broken, check console output |
-
-## 🧪 Running Tests
-
-```bash
-# Install test dependencies
-pip install pytest pytest-cov
-
-# Run tests
-pytest test_download_and_convert.py -v
-
-# Run with coverage
-pytest test_download_and_convert.py -v --cov=download_and_convert
-```
-
-## � Project Structure
+## 📁 Project Structure
 
 ```
 moodle-to-audio/
-├── download_and_convert.py    # Main script
-├── test_download_and_convert.py  # Unit tests
-├── links.txt                  # Input file for video links
-├── moodle_video_extractor.user.js  # Browser userscript
-├── RUN_ME.bat                 # Windows launcher
+├── Moodle_to_MP3_Colab.ipynb  # Main Colab notebook
+├── links.txt                   # Example input file
 └── README.md
 ```
+
+## Requirements
+
+- Google account (for Colab)
+- Chrome browser with [Get cookies.txt LOCALLY](https://chromewebstore.google.com/detail/get-cookiestxt-locally/cclelndahbckbenkjhflpdbgdldlbecc) extension
+
+## License
+
+MIT
