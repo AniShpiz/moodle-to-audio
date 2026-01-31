@@ -6,8 +6,8 @@ Convert Moodle lecture videos to MP3 files for NotebookLM transcription.
 
 This project serves as a **learning playground** for:
 - **Git Branching** - Practice with feature branches, merging, and branch workflows
-- **CI/CD Basics** - Understanding pipelines and GitHub Actions triggers
-- **Collaboration** - Pull requests, code reviews, and branch protection
+- **Unit Testing** - Writing and running Python tests with `pytest`
+- **Collaboration** - Pull requests and code reviews
 
 ## Quick Start
 
@@ -95,22 +95,10 @@ pytest test_download_and_convert.py -v
 pytest test_download_and_convert.py -v --cov=download_and_convert
 ```
 
-## 🔄 CI/CD
-
-This project uses GitHub Actions for continuous integration:
-- Runs tests on every push and pull request
-- Tests against Python 3.9, 3.10, 3.11, and 3.12
-- Generates coverage reports
-
-Check the [Actions tab](../../actions) to see the pipeline status.
-
-## 📁 Project Structure
+## � Project Structure
 
 ```
 moodle-to-audio/
-├── .github/
-│   └── workflows/
-│       └── tests.yml          # CI/CD pipeline
 ├── download_and_convert.py    # Main script
 ├── test_download_and_convert.py  # Unit tests
 ├── links.txt                  # Input file for video links
