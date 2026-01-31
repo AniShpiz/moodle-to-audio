@@ -46,3 +46,6 @@ htmlcov/
 
 # Local config
 *.local
+
+# Backup files
+Moodle_to_MP3_Colab_Backup_*.ipynb
